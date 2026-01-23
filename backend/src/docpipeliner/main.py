@@ -7,7 +7,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from docpipeliner import __version__
-from docpipeliner.api.routes import analytics, documents, health, reviews
+from docpipeliner.api.routes import analytics, documents, health, ml, reviews
 from docpipeliner.config import get_settings
 
 # Configure logging
@@ -67,6 +67,10 @@ def create_app() -> FastAPI:
     )
     app.include_router(
         analytics.router,
+        prefix=settings.api_prefix,
+    )
+    app.include_router(
+        ml.router,
         prefix=settings.api_prefix,
     )
 

@@ -56,6 +56,17 @@ class Settings(BaseSettings):
     max_pages_per_document: int = Field(default=100, ge=1, le=1000)
     image_dpi: int = Field(default=300, ge=72, le=600)
 
+    # ML/LLM Configuration
+    ml_classifier_model: str = "microsoft/layoutlmv3-base"
+    ml_ner_model: str = "en_core_web_lg"
+    llm_provider: Literal["openai", "llama"] = "openai"
+    llm_model: str = "gpt-4o-mini"
+    openai_api_key: str = ""
+    llama_base_url: str = "http://localhost:8000/v1"
+    redis_url: str = "redis://localhost:6379/0"
+    llm_cache_ttl: int = 3600  # 1 hour
+    llm_confidence_threshold: float = Field(default=0.7, ge=0.0, le=1.0)
+
     # API Keys (for MVP authentication)
     api_keys: list[str] = Field(default_factory=list)
 
